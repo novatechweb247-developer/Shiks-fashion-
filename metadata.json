@@ -1,0 +1,6 @@
+{
+  "name": "Shiks Fashion & Innovations Academy",
+  "description": "Professional fashion design services and practical fashion training academy based in Jos, Plateau State, Nigeria.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

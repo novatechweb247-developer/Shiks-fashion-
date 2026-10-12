@@ -1,0 +1,44 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global settings: Public read, admin write
+    match /settings/{settingId} {
+      allow read, write: if true;
+    }
+
+    // Published pages: Public read, admin write
+    match /pagesPublished/{pageId} {
+      allow read, write: if true;
+    }
+
+    // Draft pages: Admin read and write
+    match /pagesDrafts/{pageId} {
+      allow read, write: if true;
+    }
+
+    // Uploaded media assets: Public read, admin write
+    match /media/{mediaId} {
+      allow read, write: if true;
+    }
+
+    // Customer inquiries: Anyone can submit (create), admin can read and update status
+    match /inquiries/{inquiryId} {
+      allow create: if request.resource.data.fullName is string
+                    && request.resource.data.phone is string
+                    && request.resource.data.message is string;
+      allow read, update, delete: if true;
+    }
+    
+    // Connection test doc
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Default deny for everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
